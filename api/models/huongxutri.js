@@ -9,7 +9,8 @@ const huongXuTriSchema = new Schema({
     },
     STT: {
         type: Number,
-        required: true
+        required: true,
+        unique: true
     }
 });
 
