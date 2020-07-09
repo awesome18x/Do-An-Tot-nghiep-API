@@ -11,6 +11,8 @@ const app = express();
 const userRoute = require('./api/routers/user');
 const dmKhoaPhongRoute = require('./api/routers/dmKhoaPhong');
 const huonXuTriRoute = require('./api/routers/huongXuTri');
+const danTocRoute = require('./api/routers/danToc');
+
 
 
 //connect mongodb
@@ -44,6 +46,7 @@ app.use((req, res, next) => {
 app.use('/api/user', userRoute);
 app.use('/api/dmkhoaphong', dmKhoaPhongRoute);
 app.use('/api/huongxutri', huonXuTriRoute);
+app.use('/api/dantoc', danTocRoute);
 
 
 module.exports = app;
