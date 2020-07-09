@@ -28,9 +28,9 @@ router.post('/create', (req, res, next) => {
 });
 
 router.get('/', (req, res, next) => {
-    const type = req.query.type;
-    let loaiTK;
-    if (type) {
+    const type = +req.query.type;
+    console.log(type);
+    if (type !== 3) {
         DMKhoaPhong
             .find({ type: type })
             .sort('name')
