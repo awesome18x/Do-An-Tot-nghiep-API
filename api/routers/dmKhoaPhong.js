@@ -8,7 +8,9 @@ router.post('/create', (req, res, next) => {
     const dmKhoaPhong = new DMKhoaPhong({
         _id: new mongoose.Types.ObjectId,
         name: req.body.name,
-        type: req.body.type
+        type: req.body.type,
+        ma: req.body.ma,
+        diaChi: req.body.diaChi
     });
 
     dmKhoaPhong.save()
@@ -26,35 +28,74 @@ router.post('/create', (req, res, next) => {
 });
 
 router.get('/', (req, res, next) => {
-    DMKhoaPhong
-        .find()
-        .sort('name')
-        .exec()
-        .then(results => {
-            if (!results) {
-                res.status(500).json({
-                    msg: 'Have a error'
-                });
-            }
-            res.status(200).json({
-                msg: 'Lay du lieu thanh cong',
-                count: results.length,
-                dmKhoaPhong: results.map(dmkhoaphong => {
-                    return {
-                        _id: dmkhoaphong._id,
-                        name: dmkhoaphong.name,
-                        type: dmkhoaphong.type,
-                        createdAt: dmkhoaphong.createdAt,
-                        request: {
-                            type: 'GET'
+    const type = req.query.type;
+    let loaiTK;
+    if (type) {
+        DMKhoaPhong
+            .find({ type: type })
+            .sort('name')
+            .exec()
+            .then(results => {
+                if (!results) {
+                    res.status(500).json({
+                        msg: 'Have a error'
+                    });
+                }
+                res.status(200).json({
+                    msg: 'Lay du lieu thanh cong',
+                    count: results.length,
+                    dmKhoaPhong: results.map(dmkhoaphong => {
+                        return {
+                            _id: dmkhoaphong._id,
+                            name: dmkhoaphong.name,
+                            type: dmkhoaphong.type,
+                            createdAt: dmkhoaphong.createdAt,
+                            ma: dmkhoaphong.ma,
+                            diaChi: dmkhoaphong.diaChi,
+                            request: {
+                                type: 'GET'
+                            }
                         }
-                    }
+                    })
                 })
             })
-        })
-        .catch(error => {
-            console.log(error);
-        });
+            .catch(error => {
+                console.log(error);
+            });
+    } else {
+        DMKhoaPhong
+            .find()
+            .sort('name')
+            .exec()
+            .then(results => {
+                if (!results) {
+                    res.status(500).json({
+                        msg: 'Have a error'
+                    });
+                }
+                res.status(200).json({
+                    msg: 'Lay du lieu thanh cong',
+                    count: results.length,
+                    dmKhoaPhong: results.map(dmkhoaphong => {
+                        return {
+                            _id: dmkhoaphong._id,
+                            name: dmkhoaphong.name,
+                            type: dmkhoaphong.type,
+                            createdAt: dmkhoaphong.createdAt,
+                            ma: dmkhoaphong.ma,
+                            diaChi: dmkhoaphong.diaChi,
+                            request: {
+                                type: 'GET'
+                            }
+                        }
+                    })
+                })
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
 });
 
 
@@ -78,7 +119,9 @@ router.get('/:id', (req, res, next) => {
 router.put('/:id', (req, res, next) => {
     const id = req.params.id;
     const khoaPhongUpdate = new DMKhoaPhong({
-        name: req.body.name
+        name: req.body.name,
+        ma: req.body.ma,
+        diaChi: req.body.diaChi
     });
 
     DMKhoaPhong.findByIdAndUpdate({ _id: id }, khoaPhongUpdate)

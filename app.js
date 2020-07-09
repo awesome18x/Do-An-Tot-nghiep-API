@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const logger = require('morgan');
+const cors = require('cors')
 const path = require('path');
 const app = express();
 
@@ -19,12 +20,13 @@ mongoose.connect('mongodb://localhost:27017/Do-an-tn', { useNewUrlParser: true, 
         console.log('Connected failed!')
     });
 // import middleware
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger('dev'));
 app.use('/images', express.static(path.join('images')));
 app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
         "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept, Authorization"

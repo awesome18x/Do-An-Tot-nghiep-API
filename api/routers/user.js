@@ -9,6 +9,10 @@ router.post('/signup', (req, res, next) => {
         .then(hash => {
             const user = new User({
                 username: req.body.username,
+                khoaPhong: req.body.khoaPhongId,
+                hoTen: req.body.hoTen,
+                hocVi: req.body.hocVi,
+                CCHN: req.body.CCHN,
                 password: hash
             });
             user.save()
@@ -61,6 +65,23 @@ router.post('/login', (req, res, next) => {
                     })
                 })
         })
-})
+});
+
+router.get('/:id', (req, res, next) => {
+    const id = req.params.id;
+    User.findById({ _id: id })
+        .exec()
+        .then(person => {
+            res.status(201).json({
+                msg: `Da tim thay 1 person voi id: ${id}`,
+                user: person
+            });
+        })
+        .catch(error => {
+            res.status(500).json({
+                msg: 'Have a error'
+            });
+        });
+});
 
 module.exports = router;
