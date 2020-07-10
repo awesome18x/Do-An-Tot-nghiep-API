@@ -28,11 +28,15 @@ router.post('/create', (req, res, next) => {
 });
 
 router.get('/', (req, res, next) => {
+    const pageSize = +req.query.pageSize;
+    const pageIndex = +req.query.pageIndex;
     const type = +req.query.type;
     console.log(type);
     if (type !== 3) {
         DMKhoaPhong
             .find({ type: type })
+            .skip((pageSize * pageIndex) - pageSize)
+            .limit(pageSize)
             .sort('name')
             .exec()
             .then(results => {
@@ -65,6 +69,8 @@ router.get('/', (req, res, next) => {
     } else {
         DMKhoaPhong
             .find()
+            .skip((pageSize * pageIndex) - pageSize)
+            .limit(pageSize)
             .sort('name')
             .exec()
             .then(results => {
