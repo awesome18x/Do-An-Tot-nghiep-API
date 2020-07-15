@@ -125,6 +125,7 @@ router.get('/:id', (req, res, next) => {
 router.put('/:id', (req, res, next) => {
     const id = req.params.id;
     const khoaPhongUpdate = new DMKhoaPhong({
+        type: req.body.type,
         name: req.body.name,
         ma: req.body.ma,
         diaChi: req.body.diaChi
