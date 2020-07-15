@@ -13,6 +13,8 @@ const dmKhoaPhongRoute = require('./api/routers/dmKhoaPhong');
 const huonXuTriRoute = require('./api/routers/huongXuTri');
 const danTocRoute = require('./api/routers/danToc');
 const loaiKhamRoute = require('./api/routers/dmLoaiKham');
+const hsPhieuKhamRoute = require('./api/routers/hsPhieuKham');
+
 
 
 
@@ -50,6 +52,8 @@ app.use('/api/dmkhoaphong', dmKhoaPhongRoute);
 app.use('/api/huongxutri', huonXuTriRoute);
 app.use('/api/dantoc', danTocRoute);
 app.use('/api/dmloaikham', loaiKhamRoute);
+app.use('/api/hsphieukham', hsPhieuKhamRoute);
+
 
 
 

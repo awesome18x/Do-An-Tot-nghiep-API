@@ -1,20 +1,50 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const phieukhamSchema = new Schema({
+const hsPhieuKhamSchema = new Schema({
     _id: Schema.Types.ObjectId,
 
-    ngayKham: {
+    NgayDonTiep: {
         type: Date,
-        required: true
+        default: Date.now()
     },
-    bacSyKham: {
+    BenhNhan: {
+        type: Schema.Types.ObjectId,
+        ref: 'DMBenhNhan'
+    },
+    TheBHYT: {
+        type: Schema.Types.ObjectId,
+        ref: 'DMTheBHYT'
+    },
+    BacSyKham: {
         type: Schema.Types.ObjectId,
         ref: 'User',
     },
+    NguoiDonTiep: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    },
+    PhongKham: {
+        type: Schema.Types.ObjectId,
+        ref: 'DMKhoaPhong'
+    },
+    LoaiKham: {
+        type: Schema.Types.ObjectId,
+        ref: 'LoaiKham'
+    },
+    BenhVienTruoc: {
+        type: Schema.Types.ObjectId,
+        ref: 'DMBenhVien'
+    },
+    LuotKham: {
+        type: Number
+    },
+    ChanDoanTuyenDuoi: {
+        type: String
+    },
     MaPhieuKham: {
         type: String,
-        required: true
+        // required: true
     },
     GioBatDauKham: {
         type: Date,
@@ -35,9 +65,6 @@ const phieukhamSchema = new Schema({
         type: String
     },
     ChanDoan: {
-        type: String
-    },
-    ToanThan: {
         type: String
     },
     PPDieuTri: {
@@ -84,4 +111,4 @@ const phieukhamSchema = new Schema({
 
 });
 
-module.exports = mongoose.model('HSPhieuKham', phieukhamSchema);
+module.exports = mongoose.model('HSPhieuKham', hsPhieuKhamSchema);
