@@ -24,6 +24,9 @@ const bnSchema = new Schema({
     DanToc: {
         type: String,
     },
+    QuocTich: {
+        type: String,
+    },
     NoiLamViec: {
         type: String
     },

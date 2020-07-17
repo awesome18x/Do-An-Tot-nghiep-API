@@ -11,6 +11,7 @@ router.post('/create', (req, res, next) => {
         NgaySinh: req.body.ngaysinh,
         GioiTinh: req.body.gioitinh,
         DanToc: req.body.dantoc,
+        QuocTich: req.body.quoctich,
         SoCMND: req.body.socmnd,
         NoiLamViec: req.body.noilamviec,
         SDT: req.body.sdt,

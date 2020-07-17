@@ -20,10 +20,9 @@ router.post('/create', (req, res, next) => {
     });
 
     hsphieukham.save()
-        .then(hxt => {
+        .then(result => {
             res.status(201).json({
-                msg: 'Created HSPhieuKham thanh cong',
-                HSPhieuKham: hxt
+                HSPhieuKham: result
             });
         })
         .catch(error => {

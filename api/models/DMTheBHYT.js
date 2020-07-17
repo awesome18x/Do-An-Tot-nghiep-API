@@ -9,6 +9,9 @@ const dmBHYTSchema = new Schema({
     NoiDKKCBBD: {
         type: String,
     },
+    DiaChiTheoThe: {
+        type: String
+    },
     HanDau: {
         type: Date,
     },

@@ -58,9 +58,7 @@ app.use('/api/dantoc', danTocRoute);
 app.use('/api/dmloaikham', loaiKhamRoute);
 app.use('/api/hsphieukham', hsPhieuKhamRoute);
 app.use('/api/thebhyt', theBHYTRoute);
-
-
-
+app.use('/api/dmbenhnhan', dmBenhNhanRoute);
 
 
 module.exports = app;

@@ -7,11 +7,12 @@ router.post('/create', (req, res, next) => {
 
     const thebhyt = new DMTheBHYT({
         _id: new mongoose.Types.ObjectId,
-        SoTheBHYT: req.body.mathe,
+        SoTheBHYT: req.body.sothebhyt,
         NoiDKKCBBD: req.body.noidangkythe,
         HanDau: req.body.handau,
         HanCuoi: req.body.hancuoi,
-        MaKhuVuc: req.body.makhuvuc
+        MaKhuVuc: req.body.makhuvuc,
+        DiaChiTheoThe: req.body.diachitheothe
     });
 
     thebhyt.save()
