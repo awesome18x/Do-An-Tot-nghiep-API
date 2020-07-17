@@ -22,9 +22,7 @@ router.post('/create', (req, res, next) => {
 
     dmBenhNhan.save()
         .then(result => {
-            res.status(201).json({
-                DMBenhNhan: result
-            });
+            res.status(201).json(result);
         })
         .catch(error => {
             console.log(error);
@@ -34,99 +32,16 @@ router.post('/create', (req, res, next) => {
         });
 });
 
-router.get('/', (req, res, next) => {
-    const pageSize = +req.query.pageSize;
-    const pageIndex = +req.query.pageIndex;
-    const type = +req.query.type;
-    console.log(type);
-    if (type !== 3) {
-        DMKhoaPhong
-            .find({ type: type })
-            .skip((pageSize * pageIndex) - pageSize)
-            .limit(pageSize)
-            .sort('name')
-            .exec()
-            .then(results => {
-                if (!results) {
-                    res.status(500).json({
-                        msg: 'Have a error'
-                    });
-                }
-                res.status(200).json({
-                    msg: 'Lay du lieu thanh cong',
-                    count: results.length,
-                    dmKhoaPhong: results.map(dmkhoaphong => {
-                        return {
-                            _id: dmkhoaphong._id,
-                            name: dmkhoaphong.name,
-                            type: dmkhoaphong.type,
-                            createdAt: dmkhoaphong.createdAt,
-                            ma: dmkhoaphong.ma,
-                            diaChi: dmkhoaphong.diaChi,
-                            request: {
-                                type: 'GET'
-                            }
-                        }
-                    })
-                })
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    } else {
-        DMKhoaPhong
-            .find()
-            .skip((pageSize * pageIndex) - pageSize)
-            .limit(pageSize)
-            .sort('name')
-            .exec()
-            .then(results => {
-                if (!results) {
-                    res.status(500).json({
-                        msg: 'Have a error'
-                    });
-                }
-                res.status(200).json({
-                    msg: 'Lay du lieu thanh cong',
-                    count: results.length,
-                    dmKhoaPhong: results.map(dmkhoaphong => {
-                        return {
-                            _id: dmkhoaphong._id,
-                            name: dmkhoaphong.name,
-                            type: dmkhoaphong.type,
-                            createdAt: dmkhoaphong.createdAt,
-                            ma: dmkhoaphong.ma,
-                            diaChi: dmkhoaphong.diaChi,
-                            request: {
-                                type: 'GET'
-                            }
-                        }
-                    })
-                })
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
-
-});
-
-
 router.get('/:id', (req, res, next) => {
     const id = req.params.id;
-    DMKhoaPhong.findById({ _id: id })
+    DMBenhNhan.findById({ _id: id })
         .exec()
-        .then(khoaphong => {
-            res.status(201).json({
-                msg: `Da tim thay 1 khoa(phong) voi id: ${id}`,
-                DMKhoaPhong: khoaphong
-            });
+        .then(result => {
+            res.status(200).json(result);
         })
         .catch(error => {
-            res.status(500).json({
-                msg: 'Have a error'
-            });
-        });
+            res.status(500).json(error);
+        })
 });
 
 router.put('/:id', (req, res, next) => {

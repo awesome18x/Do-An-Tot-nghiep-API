@@ -4,6 +4,11 @@ const mongoose = require('mongoose');
 const HSPhieuKham = require('./../models/HSPhieuKham');
 
 router.post('/create', (req, res, next) => {
+    // try{
+
+    // } catch {
+
+    // }
 
     const hsphieukham = new HSPhieuKham({
         _id: new mongoose.Types.ObjectId,
@@ -31,6 +36,20 @@ router.post('/create', (req, res, next) => {
             });
             console.log(error);
         });
+});
+
+router.get('/:id', (req, res, next) => {
+    const id = req.params.id;
+    HSPhieuKham.findById({ _id: id })
+        .populate('TheBHYT BenhNhan')
+        .exec()
+        .then(data => {
+            res.status(200).json(data);
+        })
+        .catch(error => {
+            res.status(500).json(error);
+            console.log(error);
+        })
 });
 
 router.get('/', (req, res, next) => {

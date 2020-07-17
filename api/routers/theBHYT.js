@@ -17,9 +17,7 @@ router.post('/create', (req, res, next) => {
 
     thebhyt.save()
         .then(result => {
-            res.status(201).json({
-                TheBHYT: result
-            });
+            res.status(201).json(result);
         })
         .catch(error => {
             res.status(500).json({
@@ -62,18 +60,13 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
     const id = req.params.id;
-    DanToc.findById({ _id: id })
+    DMTheBHYT.findById({ _id: id })
         .exec()
-        .then(khoaphong => {
-            res.status(201).json({
-                msg: `Da tim thay 1 dan toc voi id: ${id}`,
-                dantoc: khoaphong
-            });
+        .then(result => {
+            res.status(200).json(result);
         })
         .catch(error => {
-            res.status(500).json({
-                msg: 'Have a error'
-            });
+            res.status(500).json(error);
         });
 
 });
