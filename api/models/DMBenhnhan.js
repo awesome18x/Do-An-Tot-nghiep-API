@@ -8,26 +8,21 @@ const bnSchema = new Schema({
     },
     HoTen: {
         type: String,
-        reuired: true
     },
     NgaySinh: {
         type: Date,
-        required: true
     },
     GioiTinh: {
         type: Number,
-        required: true
     },
     SoCMND: {
         type: String
     },
     DiaChi: {
         type: String,
-        required: true
     },
     DanToc: {
         type: String,
-        required: true
     },
     NoiLamViec: {
         type: String

@@ -15,7 +15,8 @@ router.post('/create', (req, res, next) => {
         NoiLamViec: req.body.noilamviec,
         SDT: req.body.sdt,
         NgheNghiep: req.body.nghenghiep,
-        MaSoThue: req.body.masothue
+        MaSoThue: req.body.masothue,
+        DiaChi: req.body.diachi
     });
 
     dmBenhNhan.save()
@@ -25,6 +26,7 @@ router.post('/create', (req, res, next) => {
             });
         })
         .catch(error => {
+            console.log(error);
             res.status(500).json({
                 msg: 'Have a error'
             });
