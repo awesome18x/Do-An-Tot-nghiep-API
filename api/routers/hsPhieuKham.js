@@ -33,9 +33,9 @@ router.post('/create', (req, res, next) => {
 
 router.get('/', (req, res, next) => {
 
-    HuongXuTri
+    HSPhieuKham
         .find()
-        .sort('STT')
+        .sort('LuotKham')
         .exec()
         .then(results => {
             if (!results) {
@@ -46,19 +46,47 @@ router.get('/', (req, res, next) => {
             res.status(200).json({
                 msg: 'Lay du lieu thanh cong',
                 count: results.length,
-                hxt: results.map(hxt => {
-                    return {
-                        _id: hxt._id,
-                        name: hxt.name,
-                        STT: hxt.STT
-                    }
-                })
+                HSPhieuKham: results
             });
         })
         .catch(error => {
             console.log(error);
         });
 
+});
+
+router.put('/:id', (req, res, next) => {
+    const id = req.params.id;
+    const updateOps = {};
+    Object.assign(updateOps, req.body)
+        // console.log(Object.keys(req.body));
+    for (const key in req.body) {
+        updateOps[key] = key.value;
+    }
+    console.log(updateOps);
+    // HSPhieuKham.findByIdAndUpdate(id, updateOps).exec((err, data) => {
+    //     console.log("error:", err, data);
+
+    //     res.status(200).json({
+    //         msg: 'Update HSPhieuKham thanh cong',
+    //         HSPhieuKham: data
+    //     })
+    // })
+
+    HSPhieuKham.update({ _id: id }, updateOps)
+        // .exec()
+        .then(result => {
+            res.status(200).json({
+                msg: 'Update HSPhieuKham thanh cong',
+                HSPhieuKham: result
+            });
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                msg: 'Have a error'
+            });
+        });
 });
 
 

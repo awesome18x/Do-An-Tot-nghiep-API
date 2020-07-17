@@ -3,45 +3,42 @@ const Schema = mongoose.Schema;
 
 const bnSchema = new Schema({
     _id: Schema.Types.ObjectId,
-    maBN: {
+    MaBN: {
         type: String,
     },
-    hoTen: {
+    HoTen: {
         type: String,
         reuired: true
     },
-    ngaySinh: {
+    NgaySinh: {
         type: Date,
         required: true
     },
-    gioiTinh: {
+    GioiTinh: {
         type: Number,
         required: true
     },
-    soCMND: {
+    SoCMND: {
         type: String
     },
-    diaChi: {
+    DiaChi: {
         type: String,
         required: true
     },
-    danToc: {
+    DanToc: {
         type: String,
         required: true
     },
-    noiLamViec: {
+    NoiLamViec: {
         type: String
     },
     SDT: {
         type: String
     },
-    ngheNghiep: {
+    NgheNghiep: {
         type: String
     },
-    maSoThue: {
-        type: String
-    },
-    maKhuVuc: {
+    MaSoThue: {
         type: String
     }
 
