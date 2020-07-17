@@ -13,7 +13,10 @@ router.post('/create', (req, res, next) => {
         BenhVienTruoc: req.body.idbenhvientruoc,
         NguoiDonTiep: req.body.idusername,
         LuotKham: req.body.luotkham,
-        TrangThai: req.body.trangthai
+        TrangThai: req.body.trangthai,
+        BenhNhan: req.body.idbenhnhan,
+        TheBHYT: req.body.idthebhyt,
+
     });
 
     hsphieukham.save()

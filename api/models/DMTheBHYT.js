@@ -3,22 +3,22 @@ const Schema = mongoose.Schema;
 
 const dmBHYTSchema = new Schema({
     _id: Schema.Types.ObjectId,
-    soTheBHYT: {
+    SoTheBHYT: {
         type: String,
-        required: true,
     },
-    noiDKKCBBD: {
+    NoiDKKCBBD: {
         type: String,
-        required: true
     },
-    hanDau: {
+    HanDau: {
         type: Date,
-        required: true
     },
-    hanCuoi: {
+    HanCuoi: {
         type: Date,
-        required: true
+    },
+    MaKhuVuc: {
+        type: String
     }
+
 });
 
 module.exports = mongoose.model('DMTheBHYT', dmBHYTSchema);

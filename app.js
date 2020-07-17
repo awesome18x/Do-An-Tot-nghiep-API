@@ -15,6 +15,8 @@ const danTocRoute = require('./api/routers/danToc');
 const loaiKhamRoute = require('./api/routers/dmLoaiKham');
 const hsPhieuKhamRoute = require('./api/routers/hsPhieuKham');
 const dmBenhNhanRoute = require('./api/routers/dmBenhNhan');
+const theBHYTRoute = require('./api/routers/theBHYT');
+
 
 
 
@@ -55,7 +57,7 @@ app.use('/api/huongxutri', huonXuTriRoute);
 app.use('/api/dantoc', danTocRoute);
 app.use('/api/dmloaikham', loaiKhamRoute);
 app.use('/api/hsphieukham', hsPhieuKhamRoute);
-app.use('/api/dmbenhnhan', dmBenhNhanRoute);
+app.use('/api/thebhyt', theBHYTRoute);
 
 
 
