@@ -16,6 +16,18 @@ const hsPhieuKhamSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'DMTheBHYT'
     },
+    SoTheBHYT: {
+        type: String
+    },
+    HoTen: {
+        type: String
+    },
+    Tuoi: {
+        type: Number
+    },
+    IsBHYT: {
+        type: Boolean
+    },
     BacSyKham: {
         type: Schema.Types.ObjectId,
         ref: 'User',
