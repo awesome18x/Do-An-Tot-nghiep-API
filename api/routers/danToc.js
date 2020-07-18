@@ -25,6 +25,7 @@ router.post('/create', (req, res, next) => {
             res.status(500).json({
                 msg: 'Have a error'
             });
+            console.log(error);
         });
 });
 
