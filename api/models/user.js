@@ -5,28 +5,29 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     username: {
         type: String,
-        required: true,
         unique: true
     },
     password: {
         type: String,
-        required: true
     },
-    khoaPhong: {
+    khoaphong: {
         type: Schema.Types.ObjectId,
         ref: 'DMKhoaPhong',
-        required: true
     },
-    hoTen: {
+    hoten: {
         type: String,
-        required: true
     },
     CCHN: {
         type: String,
-        required: true
     },
-    hocVi: {
+    hocvi: {
         type: String
+    },
+    createdAt: {
+        type: Date
+    },
+    active: {
+        type: Boolean
     }
 
 });
