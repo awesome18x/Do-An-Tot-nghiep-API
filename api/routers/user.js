@@ -4,6 +4,39 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
+router.get('/all', (req, res, next) => {
+    User
+        .find()
+        .populate('khoaphong')
+        // .sort('khoaphong')
+        .exec()
+        .then(results => {
+            if (!results) {
+                res.status(500).json({
+                    msg: 'Ko tim thay gi ca'
+                });
+            }
+            res.status(200).json({
+                msg: 'Lay du lieu thanh cong',
+                count: results.length,
+                user: results.map(hxt => {
+                    return {
+                        _id: hxt._id,
+                        hoten: hxt.hoten,
+                        khoaphong: hxt.khoaphong,
+                        active: hxt.active,
+                        username: hxt.username
+                    }
+                })
+            })
+        })
+        .catch(error => {
+            res.status(500).json(error);
+            console.log(error);
+        });
+
+});
+
 router.post('/signup', (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
@@ -138,36 +171,6 @@ router.post('/reset-password/:id', (req, res, next) => {
         })
 });
 
-router.get('/getall', (req, res, next) => {
-    User
-        .find()
-        .populate('khoaphong')
-        .sort('khoaphong')
-        .then(results => {
-            console.log(results);
-            if (!results) {
-                res.status(500).json({
-                    msg: 'Have a error'
-                });
-            }
-            res.status(200).json({
-                msg: 'Lay du lieu thanh cong',
-                count: results.length,
-                user: results.map(hxt => {
-                    return {
-                        _id: hxt._id,
-                        hoten: hxt.hoten,
-                        khoaphong: hxt.khoaphong,
-                        active: hxt.active,
-                        username: hxt.username
-                    }
-                })
-            });
-        })
-        .catch(error => {
-            res.status(500).json(error);
-            console.log(error);
-        });
-});
+
 
 module.exports = router;
