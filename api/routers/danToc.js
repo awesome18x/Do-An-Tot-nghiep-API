@@ -30,9 +30,11 @@ router.post('/create', (req, res, next) => {
 });
 
 router.get('/', (req, res, next) => {
-
-    DanToc
-        .find()
+    const pageSize = +req.query.pageSize;
+    const pageIndex = +req.query.pageIndex;
+    const dantocQuery = DanToc.find().skip(pageSize * (pageIndex - 1)).limit(pageSize);
+    let dantocFetched;
+    dantocQuery
         .sort('STT')
         .exec()
         .then(results => {
@@ -41,10 +43,13 @@ router.get('/', (req, res, next) => {
                     msg: 'Have a error'
                 });
             }
+            dantocFetched = results;
+            return DanToc.countDocuments();
+        }).then(count => {
             res.status(200).json({
                 msg: 'Lay du lieu thanh cong',
-                count: results.length,
-                dantoc: results.map(hxt => {
+                count: count,
+                dantoc: dantocFetched.map(hxt => {
                     return {
                         _id: hxt._id,
                         name: hxt.name,
