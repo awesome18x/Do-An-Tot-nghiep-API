@@ -120,6 +120,7 @@ router.post('/login', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
     const id = req.params.id;
     User.findById({ _id: id })
+        .populate('khoaphong')
         .exec()
         .then(person => {
             res.status(201).json({
@@ -134,7 +135,7 @@ router.get('/:id', (req, res, next) => {
         });
 });
 
-router.post('/reset-password/:id', (req, res, next) => {
+router.post('/change-password/:id', (req, res, next) => {
     const id = req.params.id;
     bcrypt.hash(req.body.oldPassword, 10)
         .then(result => {
@@ -167,9 +168,55 @@ router.post('/reset-password/:id', (req, res, next) => {
                 }).catch(error => {
                     console.log(error);
                 });
-
         })
 });
+
+router.put('/update-user/:id', async(req, res, next) => {
+    // const id = req.params.id;
+    // const userUpdate = new User({
+    //     hocvi: req.body.hocvi,
+    //     khoaphong: req.body.khoaphong,
+    //     active: req.body.active,
+    //     CCHN: req.body.CCHN
+    // });
+    // const updateOps = {};
+    // Object.assign(updateOps, req.body);
+    // // console.log(updateOps);
+    // for (const key of Object.keys(req.body)) {
+    //     updateOps[key] = key.value;
+    // }
+    // const data = await User.find({ _id: id });
+    // const result = await User.updateOne({ _id: id }, { $set: updateOps });
+    // console.log(result);
+    // res.sendStatus(200);
+
+    // User.updateOne({ _id: id }, { $set: updateOps })
+    //     .then((result) => {
+    //         res.status(200).json({
+    //             success: true,
+    //             message: 'Update tài khoản thành công',
+    //             user: result,
+    //         });
+    //     })
+    //     .catch((err) => {
+    //         res.status(500).json({
+    //             success: false,
+    //             message: 'Server error. Please try again.'
+    //         });
+    //         console.log(err);
+    //     });
+    const user = new User({
+        _id: req.body._id,
+        hocvi: req.body.hocvi,
+        active: req.body.active,
+        CCHN: req.body.CCHN
+    });
+    User.updateOne({ _id: req.params.id }, user).then(result => {
+        res.status(200).json({ message: "Update successful!" });
+    }).catch(error => {
+        console.log(error);
+    });
+})
 
 
 
