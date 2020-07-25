@@ -33,12 +33,18 @@ router.post('/create', (req, res, next) => {
 });
 
 router.get('/', (req, res, next) => {
+    const type = +req.query.type;
     const pageSize = +req.query.pageSize;
     const pageIndex = +req.query.pageIndex;
-    const dantocQuery = DanToc.find().skip(pageSize * (pageIndex - 1)).limit(pageSize);
+    let dantocQuery;
     let dantocFetched;
+    if (type != 0) {
+        dantocQuery = DMDVKT.find({ Type: type }).skip(pageSize * (pageIndex - 1)).limit(pageSize);
+    } else {
+        dantocQuery = DMDVKT.find().skip(pageSize * (pageIndex - 1)).limit(pageSize);
+    }
+
     dantocQuery
-        .sort('STT')
         .exec()
         .then(results => {
             if (!results) {
@@ -47,19 +53,17 @@ router.get('/', (req, res, next) => {
                 });
             }
             dantocFetched = results;
-            return DanToc.countDocuments();
+            if (type != 0) {
+                return DMDVKT.countDocuments({ Type: type });
+            } else {
+                return DMDVKT.countDocuments();
+            }
+
         }).then(count => {
             res.status(200).json({
                 msg: 'Lay du lieu thanh cong',
                 count: count,
-                dantoc: dantocFetched.map(hxt => {
-                    return {
-                        _id: hxt._id,
-                        name: hxt.name,
-                        STT: hxt.STT,
-                        ma: hxt.ma
-                    }
-                })
+                dvkt: dantocFetched
             });
         })
         .catch(error => {
@@ -70,7 +74,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
     const id = req.params.id;
-    DanToc.findById({ _id: id })
+    DMDVKT.findById({ _id: id })
         .exec()
         .then(dvkt => {
             res.status(201).json({
