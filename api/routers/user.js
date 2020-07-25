@@ -137,9 +137,12 @@ router.get('/:id', (req, res, next) => {
 
 router.post('/change-password/:id', (req, res, next) => {
     const id = req.params.id;
+    let fetchedUser;
+    let oldpasshased;
     bcrypt.hash(req.body.oldPassword, 10)
         .then(result => {
-            let user = User.findById({ _id: id })
+            oldpasshased = result;
+            User.findById({ _id: id })
                 .then(user => {
                     if (!user) {
                         res.status(401).json({
@@ -147,15 +150,15 @@ router.post('/change-password/:id', (req, res, next) => {
                         })
                     }
                     fetchedUser = user;
-                    console.log(user);
-                    return bcrypt.compare(result, fetchedUser.password);
+                    console.log(fetchedUser);
+                    return bcrypt.compare(oldpasshased, fetchedUser.password);
                 })
                 .then(result => {
-                    // if (!result) {
-                    //     return res.status(401).json({
-                    //         message: 'Auth failed!'
-                    //     })
-                    // }
+                    if (!result) {
+                        return res.status(401).json({
+                            message: 'Old password is correct!'
+                        })
+                    }
                     return bcrypt.hash(req.body.newPassword, 10);
                 })
                 .then(hash => {

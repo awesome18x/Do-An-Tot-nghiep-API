@@ -97,6 +97,30 @@ router.get('/:id', (req, res, next) => {
         });
 });
 
+router.put('/:id', (req, res, next) => {
+    const id = req.params.id;
+    const khoaPhongUpdate = new DMKhoaPhong({
+        type: req.body.type,
+        name: req.body.name,
+        ma: req.body.ma,
+        diaChi: req.body.diaChi
+    });
+
+    DMKhoaPhong.findByIdAndUpdate({ _id: id }, khoaPhongUpdate)
+        .exec()
+        .then(khoaphong => {
+            res.status(201).json({
+                msg: `Da update 1 khoa(phong) voi id: ${id}`,
+                DMKhoaPhong: khoaphong
+            });
+        }).catch(error => {
+            res.status(500).json({
+                msg: 'Have a error'
+            });
+            console.log(error);
+        });
+});
+
 router.delete('/:id', (req, res, next) => {
     const id = req.params.id;
     DMKhoaPhong.findByIdAndDelete({ _id: id })

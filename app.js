@@ -16,7 +16,7 @@ const loaiKhamRoute = require('./api/routers/dmLoaiKham');
 const hsPhieuKhamRoute = require('./api/routers/hsPhieuKham');
 const dmBenhNhanRoute = require('./api/routers/dmBenhNhan');
 const theBHYTRoute = require('./api/routers/theBHYT');
-
+const dvktRoute = require('./api/routers/dmDVKT');
 
 
 
@@ -59,6 +59,7 @@ app.use('/api/dmloaikham', loaiKhamRoute);
 app.use('/api/hsphieukham', hsPhieuKhamRoute);
 app.use('/api/thebhyt', theBHYTRoute);
 app.use('/api/dmbenhnhan', dmBenhNhanRoute);
+app.use('/api/dmdvkt', dvktRoute);
 
 
 module.exports = app;
