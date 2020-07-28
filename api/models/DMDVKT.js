@@ -18,15 +18,12 @@ const dmDVKT = new Schema({
     },
     active: {
         type: Boolean,
-        required: true
     },
     GiaDV: {
         type: Number,
-        required: true,
     },
     GiaBH: {
         type: Number,
-        required: true,
     },
     BuongThucHien: [{
         type: Schema.Types.ObjectId,

@@ -3,8 +3,8 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const HSPhieuKham = require('./../models/HSPhieuKham');
 
-router.post('/create', (req, res, next) => {
-
+router.post('/create', async(req, res, next) => {
+    let count = await HSPhieuKham.countDocuments();
     const hsphieukham = new HSPhieuKham({
         _id: new mongoose.Types.ObjectId,
         PhongKham: req.body.idbuongkham,
@@ -19,8 +19,8 @@ router.post('/create', (req, res, next) => {
         HoTen: req.body.hoten,
         Tuoi: req.body.tuoi,
         SoTheBHYT: req.body.sothebhyt,
-        IsBHYT: req.body.isbhyt
-
+        IsBHYT: req.body.isbhyt,
+        MaPhieuKham: 2020000000 + count
     });
 
     hsphieukham.save()

@@ -4,6 +4,9 @@ const mongoose = require('mongoose');
 const logger = require('morgan');
 // const cors = require('cors')
 const path = require('path');
+
+//import tinh thanh tu file json
+const fs = require('fs');
 const app = express();
 
 
@@ -49,6 +52,10 @@ app.use((req, res, next) => {
     );
     next();
 });
+
+let rewdata = fs.readFileSync('./file/studen.json');
+let student = JSON.parse(rewdata);
+console.log(student);
 
 // Cấu hình router
 app.use('/api/user', userRoute);

@@ -55,7 +55,7 @@ const hsPhieuKhamSchema = new Schema({
         type: String
     },
     MaPhieuKham: {
-        type: String,
+        type: Number,
         // required: true
     },
     GioBatDauKham: {
