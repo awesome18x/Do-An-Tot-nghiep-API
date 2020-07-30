@@ -1,24 +1,25 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const DMTinhThanh = require('./../models/DMTinhThanh');
+const DMQuanHuyen = require('./../models/DMQuanHuyen');
 
 router.post('/create', (req, res, next) => {
 
-    const dantoc = new DMTinhThanh({
+    const dantoc = new DMQuanHuyen({
         _id: new mongoose.Types.ObjectId,
         name: req.body.name,
         slug: req.body.slug,
         type: req.body.type,
-        name_with_type: req.body.name_with_type,
-        code: req.body.code
+        path_with_type: req.body.path_with_type,
+        code: req.body.code,
+        parent_code: req.body.parent_code
     });
 
     dantoc.save()
         .then(dantoc => {
             res.status(201).json({
                 msg: 'Created tinh thanh thanh cong',
-                tinh_thanh: dantoc
+                quan_huyen: dantoc
             });
         })
         .catch(error => {
@@ -30,37 +31,48 @@ router.post('/create', (req, res, next) => {
 });
 
 router.get('/', (req, res, next) => {
-    // const pageSize = +req.query.pageSize;
-    // const pageIndex = +req.query.pageIndex;
-    // const dantocQuery = DanToc.find().skip(pageSize * (pageIndex - 1)).limit(pageSize);
-    // let dantocFetched;
-    DMTinhThanh
-    // .sort('STT')
-        .find()
+    const pageSize = +req.query.pageSize;
+    const pageIndex = +req.query.pageIndex;
+    const dantocQuery = DanToc.find().skip(pageSize * (pageIndex - 1)).limit(pageSize);
+    let dantocFetched;
+    dantocQuery
+        .sort('STT')
+        .exec()
         .then(results => {
             if (!results) {
                 res.status(500).json({
                     msg: 'Have a error'
                 });
             }
-
-            return res.status(200).json({
-                tinhthanh: results
+            dantocFetched = results;
+            return DanToc.countDocuments();
+        }).then(count => {
+            res.status(200).json({
+                msg: 'Lay du lieu thanh cong',
+                count: count,
+                dantoc: dantocFetched.map(hxt => {
+                    return {
+                        _id: hxt._id,
+                        name: hxt.name,
+                        STT: hxt.STT,
+                        ma: hxt.ma
+                    }
+                })
             });
-        }).catch(error => {
+        })
+        .catch(error => {
             console.log(error);
         });
 
 });
 
-router.get('/:id', (req, res, next) => {
-    const id = req.params.id;
-    DanToc.findById({ _id: id })
+router.get('/:code', (req, res, next) => {
+    const code = req.params.code;
+    DMQuanHuyen.find({ parent_code: code })
         .exec()
-        .then(khoaphong => {
+        .then(quanhuyen => {
             res.status(201).json({
-                msg: `Da tim thay 1 dan toc voi id: ${id}`,
-                dantoc: khoaphong
+                quanhuyen
             });
         })
         .catch(error => {

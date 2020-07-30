@@ -20,6 +20,12 @@ const hsPhieuKhamRoute = require('./api/routers/hsPhieuKham');
 const dmBenhNhanRoute = require('./api/routers/dmBenhNhan');
 const theBHYTRoute = require('./api/routers/theBHYT');
 const dvktRoute = require('./api/routers/dmDVKT');
+const dmtinhthanhRoute = require('./api/routers/dmTinhThanh');
+const dmquanhuyenRoute = require('./api/routers/dmQuanHuyen');
+const dmPhuongXaRoute = require('./api/routers/dmPhuongXa');
+
+
+
 
 
 
@@ -67,6 +73,11 @@ app.use('/api/hsphieukham', hsPhieuKhamRoute);
 app.use('/api/thebhyt', theBHYTRoute);
 app.use('/api/dmbenhnhan', dmBenhNhanRoute);
 app.use('/api/dmdvkt', dvktRoute);
+app.use('/api/dmtinhthanh', dmtinhthanhRoute);
+app.use('/api/dmquanhuyen', dmquanhuyenRoute);
+app.use('/api/dmphuongxa', dmPhuongXaRoute);
+
+
 
 
 module.exports = app;

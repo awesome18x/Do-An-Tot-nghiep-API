@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const dmQuanhuyen = new Schema({
+const dmPhuongxa = new Schema({
     _id: Schema.Types.ObjectId,
     name: {
         type: String,
@@ -30,4 +30,4 @@ const dmQuanhuyen = new Schema({
 
 });
 
-module.exports = mongoose.model('DMQuanHuyen', dmQuanhuyen);
+module.exports = mongoose.model('DMPhuongXa', dmPhuongxa);
