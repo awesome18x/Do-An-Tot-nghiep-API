@@ -66,14 +66,13 @@ router.get('/', (req, res, next) => {
 
 });
 
-router.get('/:id', (req, res, next) => {
-    const id = req.params.id;
-    DanToc.findById({ _id: id })
+router.get('/:code', (req, res, next) => {
+    const code = req.params.code;
+    DMPhuongXa.find({ parent_code: code })
         .exec()
-        .then(khoaphong => {
+        .then(phuongxa => {
             res.status(201).json({
-                msg: `Da tim thay 1 dan toc voi id: ${id}`,
-                dantoc: khoaphong
+                phuongxa
             });
         })
         .catch(error => {
