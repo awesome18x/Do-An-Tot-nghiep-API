@@ -26,12 +26,6 @@ const dmPhuongXaRoute = require('./api/routers/dmPhuongXa');
 
 
 
-
-
-
-
-
-
 //connect mongodb
 mongoose.connect('mongodb://localhost:27017/Do-an-tn', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
     .then(() => {
@@ -59,9 +53,9 @@ app.use((req, res, next) => {
     next();
 });
 
-let rewdata = fs.readFileSync('./file/studen.json');
-let student = JSON.parse(rewdata);
-console.log(student);
+// let rewdata = fs.readFileSync('./file/studen.json');
+// let student = JSON.parse(rewdata);
+// console.log(student);
 
 // Cấu hình router
 app.use('/api/user', userRoute);

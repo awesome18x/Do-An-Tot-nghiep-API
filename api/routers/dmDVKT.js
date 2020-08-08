@@ -71,16 +71,14 @@ router.get('/', (req, res, next) => {
         });
 
 });
+//lấy công khám theo buồng khám
 
-router.get('/:id', (req, res, next) => {
-    const id = req.params.id;
-    DMDVKT.findById({ _id: id })
+router.get('/:idbuongkham', (req, res, next) => {
+    const id = req.params.idbuongkham;
+    DMDVKT.find({ Type: 1, BuongThucHien: { $in: id } })
         .exec()
         .then(dvkt => {
-            res.status(201).json({
-                msg: `Da tim thay 1 dvkt voi id: ${id}`,
-                dvkt: dvkt
-            });
+            res.status(201).json(dvkt);
         })
         .catch(error => {
             res.status(500).json({

@@ -40,7 +40,7 @@ router.post('/create', async(req, res, next) => {
 router.get('/:id', (req, res, next) => {
     const id = req.params.id;
     HSPhieuKham.findById({ _id: id })
-        .populate('TheBHYT BenhNhan')
+        .populate('PhongKham BenhNhan TheBHYT')
         .exec()
         .then(data => {
             res.status(200).json(data);
