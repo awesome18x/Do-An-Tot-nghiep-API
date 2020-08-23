@@ -118,6 +118,14 @@ const hsPhieuKhamSchema = new Schema({
             // 6 - có tên ở danh sách chờ cấp số vào viện
             // 7 - có tên ở danh sách đang điều trị nội trú
             // 8- có tên ở danh sách đã ra viện
+    },
+    IdHSChiDinhDVKT: {
+        type: Schema.Types.ObjectId,
+        ref: 'HSChiDinhDVKT'
+    },
+    iddonthuoc: {
+        type: Schema.Types.ObjectId,
+        ref: 'HSDonThuoc'
     }
 
 

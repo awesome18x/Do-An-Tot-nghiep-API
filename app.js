@@ -23,6 +23,8 @@ const dvktRoute = require('./api/routers/dmDVKT');
 const dmtinhthanhRoute = require('./api/routers/dmTinhThanh');
 const dmquanhuyenRoute = require('./api/routers/dmQuanHuyen');
 const dmPhuongXaRoute = require('./api/routers/dmPhuongXa');
+const hsChiDinhDVKTRoute = require('./api/routers/hsChiDinhDVKT');
+
 
 
 
@@ -70,6 +72,7 @@ app.use('/api/dmdvkt', dvktRoute);
 app.use('/api/dmtinhthanh', dmtinhthanhRoute);
 app.use('/api/dmquanhuyen', dmquanhuyenRoute);
 app.use('/api/dmphuongxa', dmPhuongXaRoute);
+app.use('/api/hschidinhdvkt', hsChiDinhDVKTRoute);
 
 
 

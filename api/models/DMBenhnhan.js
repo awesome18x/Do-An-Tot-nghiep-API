@@ -38,6 +38,9 @@ const bnSchema = new Schema({
     },
     MaSoThue: {
         type: String
+    },
+    Tuoi: {
+        type: Number
     }
 
 

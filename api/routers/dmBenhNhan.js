@@ -17,7 +17,8 @@ router.post('/create', (req, res, next) => {
         SDT: req.body.sdt,
         NgheNghiep: req.body.nghenghiep,
         MaSoThue: req.body.masothue,
-        DiaChi: req.body.diachi
+        DiaChi: req.body.diachi,
+        Tuoi: req.body.tuoi
     });
 
     dmBenhNhan.save()

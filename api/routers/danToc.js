@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const DanToc = require('./../models/DMDanToc');
 const DMDanToc = require('./../models/DMDanToc');
 
-router.post('/create', (req, res, next) => {
+router.post('/create', async(req, res, next) => {
 
     const dantoc = new DanToc({
         _id: new mongoose.Types.ObjectId,
