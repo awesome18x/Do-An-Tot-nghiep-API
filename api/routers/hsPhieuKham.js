@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const HSPhieuKham = require('./../models/HSPhieuKham');
+const moment = require('moment');
 
 router.post('/create', async(req, res, next) => {
     let count = await HSPhieuKham.countDocuments();
@@ -35,6 +36,25 @@ router.post('/create', async(req, res, next) => {
             });
             console.log(error);
         });
+});
+
+router.get('/danhsach/dstiepdon', (req, res, next) => {
+    // console.log(req.query);
+    // console.log(req.query.from);
+    let filter = {
+        NgayDonTiep: {
+            gte: req.query.from,
+            lte: req.query.to
+        }
+    };
+    HSPhieuKham.find(filter)
+    .exec()
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.log(error);
+    });
 });
 
 router.get('/:id', (req, res, next) => {
@@ -133,6 +153,7 @@ router.put('/:id', (req, res, next) => {
             });
         });
 });
+
 
 
 

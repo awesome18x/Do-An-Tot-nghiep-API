@@ -33,6 +33,10 @@ router.post('/create', (req, res, next) => {
         });
 });
 
+router.get('/getbn', (req, res, next) => {
+    console.log(req.query);
+});
+
 router.get('/:id', (req, res, next) => {
     const id = req.params.id;
     DMBenhNhan.findById({ _id: id })

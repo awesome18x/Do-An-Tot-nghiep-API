@@ -17,7 +17,8 @@ router.post('/create', async(req, res, next) => {
         NguoiTao: req.body.NguoiTao,
         TrangThai: req.body.TrangThai,
         GhiChu: req.body.GhiChu,
-        IsBHYT: req.body.IsBHYT
+        IsBHYT: req.body.IsBHYT, 
+        KetQua: req.body.KetQua
     });
 
     hschidinhdvkt.save()
@@ -36,15 +37,18 @@ router.post('/create', async(req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
     const id = req.params.id;
-    HSChiDinhDVKT.findById({ _id: id })
+    HSChiDinhDVKT
+        .find({ idPhieuKham: id})
+        .populate('idDVKT NguoiTao')
         .exec()
         .then(data => {
             res.status(200).json(data);
         })
         .catch(error => {
-            res.status(500).json(error);
             console.log(error);
         })
+         
+    
 });
 
 
@@ -82,6 +86,23 @@ router.put('/:id', (req, res, next) => {
             });
         });
 });
+
+router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    HSChiDinhDVKT.findByIdAndDelete({_id: id})
+        .exec()
+        .then(result => {
+            res.status(200).json({
+                HSPhieuKham: result
+            });
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                msg: 'Have a error'
+            });
+        });
+})
 
 
 
