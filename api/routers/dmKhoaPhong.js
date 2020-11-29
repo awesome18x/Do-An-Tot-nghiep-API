@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const DMKhoaPhong = require('./../models/DMKhoaPhong');
+const HSPhieuKham = require('../models/HSPhieuKham');
 
 router.post('/create', (req, res, next) => {
 
@@ -26,6 +27,21 @@ router.post('/create', (req, res, next) => {
             });
         });
 });
+
+router.get('/laydsphongkham', (req, res) => {
+    DMKhoaPhong.find({type: 2}).exec().then(data => {
+        res.status(200).json(data)
+    }).catch(error => {
+        console.log(error);
+    })
+})
+router.get('/laydskhoant', (req, res) => {
+    DMKhoaPhong.find({type: 1}).exec().then(data => {
+        res.status(200).json(data)
+    }).catch(error => {
+        console.log(error);
+    })
+})
 
 router.get('/', (req, res, next) => {
     const pageSize = +req.query.pageSize;
@@ -106,7 +122,7 @@ router.put('/:id', (req, res, next) => {
         diaChi: req.body.diaChi
     });
 
-    DMKhoaPhong.findByIdAndUpdate({ _id: id }, khoaPhongUpdate)
+    DMKhoaPhong.update({ _id: id }, req.body)
         .exec()
         .then(khoaphong => {
             res.status(201).json({

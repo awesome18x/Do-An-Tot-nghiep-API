@@ -13,10 +13,10 @@ const dmBHYTSchema = new Schema({
         type: String
     },
     HanDau: {
-        type: Date,
+        type: String,
     },
     HanCuoi: {
-        type: Date,
+        type: String,
     },
     MaKhuVuc: {
         type: String

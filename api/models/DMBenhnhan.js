@@ -10,7 +10,7 @@ const bnSchema = new Schema({
         type: String,
     },
     NgaySinh: {
-        type: Date,
+        type: String,
     },
     GioiTinh: {
         type: Number,

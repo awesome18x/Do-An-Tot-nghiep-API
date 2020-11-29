@@ -34,7 +34,7 @@ const hsPhieuKhamSchema = new Schema({
     },
     NguoiDonTiep: {
         type: Schema.Types.ObjectId,
-        ref: 'User',
+        // ref: 'User',
     },
     PhongKham: {
         type: Schema.Types.ObjectId,
@@ -56,6 +56,10 @@ const hsPhieuKhamSchema = new Schema({
     },
     MaPhieuKham: {
         type: Number,
+        // required: true
+    },
+    MaBenhNhan: {
+        type: String,
         // required: true
     },
     GioBatDauKham: {
@@ -126,6 +130,9 @@ const hsPhieuKhamSchema = new Schema({
     iddonthuoc: {
         type: Schema.Types.ObjectId,
         ref: 'HSDonThuoc'
+    },
+    createdAt: {
+        type: Date
     }
 
 

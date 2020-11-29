@@ -113,18 +113,38 @@ router.delete('/:id', (req, res, next) => {
 
 router.put('/:id', (req, res, next) => {
     const id = req.params.id;
-    const danTocUpdate = new DMDanToc({
-        name: req.body.name,
-        ma: req.body.ma,
-        STT: req.body.STT
-    });
+    // const dvkt = new DMDVKT({
+    //     _id: new mongoose.Types.ObjectId,
+    //     Name: req.body.name,
+    //     MaDV: req.body.madv,
+    //     Type: +req.body.type,
+    //     active: req.body.active,
+    //     GiaDV: req.body.giadv,
+    //     GiaBH: req.body.giabh,
+    //     BuongThucHien: req.body.buongthuchien,
+    //     KhoaThucHien: req.body.khoathuchien
+    // });
+    console.log(req.body);
 
-    DMDanToc.findByIdAndUpdate({ _id: id }, danTocUpdate)
+    DMDVKT.findOneAndUpdate({ _id: id }, {
+        $set: {
+            Name: req.body.name,
+            MaDV: req.body.madv,
+            Type: +req.body.type,
+            active: req.body.active,
+            GiaDV: req.body.giadv,
+            GiaBH: req.body.giabh,
+            BuongThucHien: req.body.buongthuchien,
+            KhoaThucHien: req.body.khoathuchien
+        }
+    },{
+        upsert: true
+    })
         .exec()
-        .then(khoaphong => {
+        .then(dvkt => {
             res.status(201).json({
-                msg: `Da update 1 DAN TOC voi id: ${id}`,
-                DMKhoaPhong: khoaphong
+                msg: `Da update 1 DVKT voi id: ${id}`,
+                DMDVKT: dvkt
             });
         })
         .catch(error => {
@@ -133,6 +153,20 @@ router.put('/:id', (req, res, next) => {
             });
         });
 });
+
+
+router.get('/chitietdvkt/:id', (req, res) => {
+    let idDVKT = req.params.id;
+    DMDVKT.findById({_id: idDVKT})
+    .populate('BuongThucHien KhoaThucHien')
+        .exec()
+        .then(data => {
+            res.status(200).json(data);
+        })
+        .catch(error => {
+            res.status(400).json(error);
+        })
+})
 
 
 
