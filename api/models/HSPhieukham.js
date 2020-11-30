@@ -110,6 +110,12 @@ const hsPhieuKhamSchema = new Schema({
     ChieuCao: {
         type: String
     },
+    LoiDan: {
+        type: String
+    },
+    NgayTaiKham: {
+        type: String
+    },
     TrangThai: {
         type: Number,
         required: true
