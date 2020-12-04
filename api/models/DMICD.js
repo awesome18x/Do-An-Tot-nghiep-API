@@ -17,6 +17,9 @@ const dmICDSchema = new Schema({
     },
     chuong: {
         type: String
+    },
+    active: {
+        type: Boolean
     }
     
 });

@@ -139,6 +139,16 @@ const hsPhieuKhamSchema = new Schema({
     },
     createdAt: {
         type: Date
+    }, 
+    isNoiTru: {
+        type: Boolean
+    },
+    IsCapCuu: {
+        type: Boolean
+    },
+    idMaBenhChinh: {
+        type: Schema.Types.ObjectId,
+        ref: 'DMICD'
     }
 
 
