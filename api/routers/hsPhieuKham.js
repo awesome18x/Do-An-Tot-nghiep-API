@@ -133,7 +133,7 @@ router.get('/danhsach/dsdangkham', async (req, res) => {
 router.get('/:id', (req, res, next) => {
     const id = req.params.id;
     HSPhieuKham.findById({ _id: id })
-        .populate('PhongKham BenhNhan TheBHYT')
+        .populate('PhongKham BenhNhan TheBHYT idMaBenhChinh idMaBenhKemTheo')
         .exec()
         .then(data => {
             res.status(200).json(data);

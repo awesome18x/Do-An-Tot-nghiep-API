@@ -133,7 +133,7 @@ const hsPhieuKhamSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'HSChiDinhDVKT'
     },
-    iddonthuoc: {
+    idHSDonThuoc: {
         type: Schema.Types.ObjectId,
         ref: 'HSDonThuoc'
     },
@@ -149,7 +149,11 @@ const hsPhieuKhamSchema = new Schema({
     idMaBenhChinh: {
         type: Schema.Types.ObjectId,
         ref: 'DMICD'
-    }
+    },
+    idMaBenhKemTheo: [{
+        type: Schema.Types.ObjectId,
+        ref: 'DMICD'
+    }]
 
 
 });

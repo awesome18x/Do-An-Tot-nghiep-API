@@ -25,8 +25,7 @@ const dmquanhuyenRoute = require('./api/routers/dmQuanHuyen');
 const dmPhuongXaRoute = require('./api/routers/dmPhuongXa');
 const hsChiDinhDVKTRoute = require('./api/routers/hsChiDinhDVKT');
 const dmICDRoute = require('./api/routers/dmICD');
-// const dsTiepDonBenhNhan = require('./api/routers/dsTiepDonBenhNhan');
-
+const dmBenhAn = require('./api/routers/dmBenhAn');
 
 
 //connect mongodb
@@ -38,7 +37,6 @@ mongoose.connect('mongodb://localhost:27017/Do-an-tn', { useNewUrlParser: true, 
         console.log('Connected failed!')
     });
 // import middleware
-// app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(logger('dev'));
@@ -75,8 +73,7 @@ app.use('/api/dmquanhuyen', dmquanhuyenRoute);
 app.use('/api/dmphuongxa', dmPhuongXaRoute);
 app.use('/api/hschidinhdvkt', hsChiDinhDVKTRoute);
 app.use('/api/dmicd', dmICDRoute);
-// app.use('/api/dsTiepDonBenhNhan', dsTiepDonBenhNhan);
-
+app.use('/api/dmbenhan', dmBenhAn);
 
 
 module.exports = app;
